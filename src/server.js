@@ -1,6 +1,17 @@
 const express = require('express');
+const mysql = require('mysql2/promise');
 const app = express();
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT;
+require('dotenv').config();
+
+const db = mysql.createPool({
+  host: process.env.DB_HOS,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME
+});
+
+app.use(express.json());
 
 app.get('/', (req, res) => {
   res.json({message : "App is running on docker container"});

@@ -1,0 +1,29 @@
+version: '3.1'
+
+services:
+  app:
+      image: sooieese/pocket:1.0
+      container_name: pocket_app
+      ports:
+        - "8080:8080"
+      environment:
+        DB_HOST: mysql
+        DB_USER: ${DB_USER}
+        DB_PASSWORD: ${DB_PASSWORD}
+        DB_NAME: ${DB_NAME}
+      depends_on:
+        - mysql     
+
+  mysql:
+    image: mysql:5.7
+    container_name: mysql_db
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+volumes:
+  mysql_data:
