@@ -1,5 +1,6 @@
 const express = require('express');
 const mysql = require('mysql2/promise');
+const AWS = require('aws-sdk');
 const app = express();
 const PORT = process.env.PORT;
 require('dotenv').config();
@@ -10,6 +11,9 @@ const db = mysql.createPool({
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME
 });
+
+const s3 = new AWS.S3();
+
 
 app.use(express.json());
 
