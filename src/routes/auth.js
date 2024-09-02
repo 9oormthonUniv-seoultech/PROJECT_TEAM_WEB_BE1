@@ -15,7 +15,7 @@ router.get('/kakao/callback', passport.authenticate('kakao', {
 
 // 로그아웃
 router.get('/logout', (req, res, next) => {
-    req.logOut(err => {
+    req.logout(err => {
         if (err) {
             return next(err);
         } else {
